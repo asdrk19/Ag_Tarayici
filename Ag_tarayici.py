@@ -19,18 +19,18 @@ def kullanicidan():
     return ip
 
 def ag_tarayici(ip):
-        arp_istek_paketi=scapy.ARP(pdst=ip)
-        #scapy.ls(scapy.ARP()) #scapy.ls yardım komutudur.Bu fonksiyonun içine yardım almak istediğiniz fonksiyonu girince ekrana yardımı basar.
+        arp_istek_paketi=scapy.ARP(pdst=ip) #paket oluşturduk.
+        
 
         arp_yayinlayici=scapy.Ether(dst="ff:ff:ff:ff:ff:ff")#bütün iplere default olarak bu mac adresini gönderdik.
-        #scapy.ls(scapy.Ether())
+        
 
         paket_birlestirici=arp_yayinlayici/arp_istek_paketi
 
         (cevap_gelen_liste,cevap_gelmeyen_liste)=scapy.srp(paket_birlestirici,timeout=1)
-        cevap_gelen_liste.summary() #summary özeti gösterir.
+        cevap_gelen_liste.summary()
 
-kullanici_ipsi = kullanicidan()
+kullanici_ipsi = kullanicidan() #Kullanıcıdan tarama yapmak istediğimiz ip aralığını (10.0.2.0/24) aldık ve ag tarayici fonksiyonumuza gönderdik.  
 
 ag_tarayici(kullanici_ipsi)
 
